@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { LoginForm } from './component/LoginForm';
+import { Site } from './component/Site';
 import { apiFetch } from './util/apiFetch';
 
 
@@ -9,7 +10,8 @@ export default function App() {
 
   useEffect( () => {
 
-    const dataFetch = async ()=> {
+      // fetching userData if user is connecter
+     const featchUserData = async ()=> {
 
       const request = await  apiFetch('/me', { method:'GET'})
       if(request.ok){
@@ -17,23 +19,20 @@ export default function App() {
         setUser(response)
       }
     }
-    dataFetch()
+
+    featchUserData()
+
   },[])
 
-
-  if(user === null){
+  if (user === null){
     return null
   }
+
   return (
     <div className="App">
-        <main className="container">
 
-        { user ? <h1>welcome page </h1>  : <LoginForm setUser={setUser}/>}
-
-        </main>
+        { user ?  <Site/> : <LoginForm setUser={setUser}/>}
         
-
-
     </div>
   );
 }
