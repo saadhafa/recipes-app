@@ -25,6 +25,9 @@ class RecipesController {
             };
             return acc;
         }, {}));
+        await recipe.preload('ingredients', (query) => {
+            query.pivotColumns(['quantity']);
+        });
         return recipe;
     }
     async update({ request, params }) {

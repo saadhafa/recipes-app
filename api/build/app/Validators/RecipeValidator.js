@@ -13,6 +13,7 @@ class RecipeValidator {
                 })
             ]),
             content: Validator_1.schema.string(),
+            short: Validator_1.schema.string(),
             ingredients: Validator_1.schema.array().members(Validator_1.schema.object().members({
                 id: Validator_1.schema.number([Validator_1.rules.exists({ table: 'ingredients', column: 'id' })]),
                 quantity: Validator_1.schema.number(),
