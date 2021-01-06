@@ -10,30 +10,30 @@ export default function App() {
 
   useEffect( () => {
 
-      // fetching userData if user is connecter
-     const featchUserData = async ()=> {
-
-      const request = await  apiFetch('/me', { method:'GET'})
-      if(request.ok){
-        const response = await request.json()
-        setUser(response)
-      }
+  apiFetch('/me', { method:'GET'}).then((response) => {
+    if(response.ok){
+      response.json().then(setUser)
+    }else{
+      setUser(false)
     }
+    
 
-    featchUserData()
+  }).catch(() => setUser(false))
 
+  
   },[])
 
-  if (user === null){
-    return null
-  }
+
+console.log('user ->',user)
+
+if(user === null){
+  return null
+}
+
+
 
   return (
-    <div className="App">
-
-        { user ?  <Site/> : <LoginForm setUser={setUser}/>}
-        
-    </div>
+    user ? <Site/> : <LoginForm setUser={setUser}/>
   );
 }
 
