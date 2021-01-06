@@ -30,6 +30,6 @@ function IngredientRow({ingredient,onDelete}){
   }
   return <li>
     {ingredient.title}
-    <button onClick={handleDelete} disabled={loadding}>Delete</button>
+    <button className="btn btn-danger" onClick={handleDelete} disabled={loadding}>Delete</button>
     </li>
 }

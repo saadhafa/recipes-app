@@ -39,14 +39,13 @@ export function useIngredients(){
       }
     },
     deleteiingredients: async function(id){
-      const request = await  apiFetch(`/ingredients/${id}`,{method:'DELETE'})
+      const request = await  apiFetch(`/ingredients/${id}`,{method:'GET'})
       if (request.ok){
         console.log('request -> ',request.ok)
         dispatch({type:'DEL_ING',payload:id})
       }
     }
   }
-
 
 }
 
