@@ -25,8 +25,13 @@ class IngredientsController {
     }
     async delete({ params }) {
         const ingredient = await Ingredient_1.default.findOrFail(params.id);
+        const recipe = await ingredient.related('recipes').query().first();
+        if (recipe) {
+            throw new Error(`Cet ingrédient est utilisé pour la recette '${recipe.title}'`);
+        }
+        await ingredient.related('recipes').detach();
         await ingredient.delete();
-        return JSON.stringify({ action: true });
+        return null;
     }
 }
 exports.default = IngredientsController;
