@@ -92,7 +92,24 @@ function CreateNewIngredient({onCreate,fetchIngredients}){
 
   const [loadding,setLoadding] = useState(false)
   const [error,setError] = useState(null)
+  const [created,setCreated] = useState(null)
 
+
+  // alert watcher
+  useEffect(()=>{
+    const timer =  setInterval(() => {
+      setError(null)
+      setCreated(null)
+    }, 2000);
+
+    return () =>{
+      clearInterval(timer)
+    }
+  }, [created,error])
+
+
+
+  // New item creation 
   const handleCreation = async  function(e){
     const form = e.target
     e.preventDefault()
@@ -100,8 +117,9 @@ function CreateNewIngredient({onCreate,fetchIngredients}){
     const Data = new FormData(form)
     const request = await onCreate(Data)
     if(request.errors){
-      setError("error for now ")
-      console.log(error)
+      setError("Already exist ")
+    }else{
+      setCreated('Item Created successfully')
     }
     // fetching after adding item
     fetchIngredients()
@@ -112,10 +130,10 @@ function CreateNewIngredient({onCreate,fetchIngredients}){
 
   return (
     <React.Fragment>
-
     <div>Create New item</div>
-
-    <form onSubmit={handleCreation} className="form-group d-flex " style={{width: "50%", margin: '0 auto'}}>
+    { error ? <div style={{margin:'30px auto 30px auto',width:"50%"}} className="alert alert-danger d-b">{error} ☹️</div> : ''}
+    { created ? <div style={{margin:'30px auto 30px auto',width:"50%"}} className="alert alert-success d-b">{created}</div> : ''}
+    <form onSubmit={handleCreation} className="form-group d-flex" style={{width: "50%", margin: '0 auto'}}>
     <input type="text" name="title"style={{marginRight:'20px',marginTop:'20px'}} className="form-control" placeholder="Enter new title" required/>
     <input type="text" name="unit"className="form-control" style={{marginRight:'20px',marginTop:'20px'}} placeholder="Enter new unit" />
     <button style={{marginRight:'20px',marginTop:'20px'}} disabled={loadding} className="btn btn-primary" type="submit">Create</button>
@@ -124,3 +142,5 @@ function CreateNewIngredient({onCreate,fetchIngredients}){
   )
 
 }
+
+
