@@ -1,7 +1,7 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect,memo} from 'react'
 import { Loader } from '../../UI/loader'
 
-export function Ingredients({ingredients,onDelete, onUpdate,onCreate,fetchIngredients}){
+export const Ingredients = memo(function ({ingredients,onDelete, onUpdate,onCreate,fetchIngredients}){
 
   return (
    <>
@@ -10,9 +10,9 @@ export function Ingredients({ingredients,onDelete, onUpdate,onCreate,fetchIngred
     {ingredients === null ? <Loader/> :<IngredientList  onUpdate={onUpdate} onDelete={onDelete} ingredients={ingredients} />  }
    </>
   )
-}
+})
 
-function IngredientList({ingredients,onDelete, onUpdate}){
+const IngredientList = memo(function ({ingredients,onDelete, onUpdate}){
 
 return (
   <div>
@@ -20,10 +20,11 @@ return (
   </div>
 
 )
-}
+})
 
 
-function IngredientRow({ingredient,onDelete,onUpdate}){
+
+const IngredientRow = memo (function ({ingredient,onDelete,onUpdate}){
 
 
   // compoment states
@@ -85,10 +86,10 @@ function IngredientRow({ingredient,onDelete,onUpdate}){
     </form>
     </React.Fragment>
   )
-}
+})
 
 
-function CreateNewIngredient({onCreate,fetchIngredients}){
+const CreateNewIngredient = memo(function ({onCreate,fetchIngredients}){
 
   const [loadding,setLoadding] = useState(false)
   const [error,setError] = useState(null)
@@ -126,8 +127,6 @@ function CreateNewIngredient({onCreate,fetchIngredients}){
     setLoadding(false)
   }
 
-
-
   return (
     <React.Fragment>
     <div>Create New item</div>
@@ -141,6 +140,6 @@ function CreateNewIngredient({onCreate,fetchIngredients}){
     </React.Fragment>
   )
 
-}
+})
 
 

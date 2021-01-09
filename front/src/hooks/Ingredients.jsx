@@ -1,4 +1,4 @@
-import {useReducer} from 'react'
+import {useReducer,useCallback} from 'react'
 import { apiFetch } from '../util/apiFetch'
 
 function reducer(state,action){
@@ -31,7 +31,7 @@ export function useIngredients(){
   return {
 
     ingredients: state.ingredients,
-    fetchIngredients: async function(){
+    fetchIngredients: useCallback(async function(){
       dispatch({type:"FETCHING"})
       
       if(state.loading){
@@ -43,16 +43,16 @@ export function useIngredients(){
       if(request.ok){
           dispatch({type:"SET_ING", payload: ingredients })
       }
-    },
-    deleteiingredients: async function(id){
+    },[state]),
+    deleteiingredients: useCallback(async function(id){
       const request = await  apiFetch(`/ingredients/${id}`,{method:'DELETE'})
       if (request.ok){
         console.log('request -> ',request.ok)
         dispatch({type:'DEL_ING',payload:id})
       }
-    },
+    },[]),
 
-    updateIngredients: async function (newIngredient,id){
+    updateIngredients: useCallback(async function (newIngredient,id){
         const request = await apiFetch(`/ingredients/${id}`,{method:'PUT',body: newIngredient})
         if(request.ok){
           dispatch({type:"UP_ING", target:id,payload: Object.fromEntries(newIngredient)})
@@ -60,8 +60,8 @@ export function useIngredients(){
         
         return await request.json()
 
-    },
-    createIngredients: async function (newIngredient){
+    },[]),
+    createIngredients: useCallback(async function (newIngredient){
       const request = await apiFetch(`/ingredients`,{method:'POST',body: newIngredient})
       if(request.ok){
         newIngredient.append('id', parseInt(Math.random()))
@@ -69,7 +69,7 @@ export function useIngredients(){
       }
       
       return await request.json()
-  }
+  },[])
 }
   
 
