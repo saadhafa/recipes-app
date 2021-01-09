@@ -9,14 +9,15 @@ export function Site(){
     ingredients,
     fetchIngredients,
     deleteiingredients,
-    updateIngredients
+    updateIngredients,
+    createIngredients
   } = useIngredients()
 
 
 let content = null
 
 if(page === 'ingredients'){
-  content = <Ingredients onUpdate={updateIngredients} onDelete={deleteiingredients} ingredients={ingredients}  />
+  content = <Ingredients fetchIngredients={fetchIngredients} onCreate={createIngredients} onUpdate={updateIngredients} onDelete={deleteiingredients} ingredients={ingredients}  />
 }
 
 
@@ -27,13 +28,16 @@ useEffect(() => {
     fetchIngredients()
   }
   
-}, [page,fetchIngredients])
+}, [page])
 
 
 
   return <div>
       <NavBar currentPage={page} onChangePage={setPage}/>
+      <div className="container">
       {content}
+      </div>
+      
       </div>
 
 }

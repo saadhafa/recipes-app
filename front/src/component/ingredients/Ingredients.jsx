@@ -1,12 +1,13 @@
 import React, {useState,useEffect} from 'react'
 import { Loader } from '../../UI/loader'
 
-export function Ingredients({ingredients,onDelete, onUpdate}){
+export function Ingredients({ingredients,onDelete, onUpdate,onCreate,fetchIngredients}){
 
   return (
    <>
     <h2>List des ingredients</h2>
-    {ingredients === null ? <Loader/> : <IngredientList onUpdate={onUpdate} onDelete={onDelete} ingredients={ingredients} />  }
+    <CreateNewIngredient onCreate={onCreate} fetchIngredients={fetchIngredients} />
+    {ingredients === null ? <Loader/> :<IngredientList  onUpdate={onUpdate} onDelete={onDelete} ingredients={ingredients} />  }
    </>
   )
 }
@@ -84,4 +85,42 @@ function IngredientRow({ingredient,onDelete,onUpdate}){
     </form>
     </React.Fragment>
   )
+}
+
+
+function CreateNewIngredient({onCreate,fetchIngredients}){
+
+  const [loadding,setLoadding] = useState(false)
+  const [error,setError] = useState(null)
+
+  const handleCreation = async  function(e){
+    const form = e.target
+    e.preventDefault()
+    setLoadding(true)
+    const Data = new FormData(form)
+    const request = await onCreate(Data)
+    if(request.errors){
+      setError("error for now ")
+      console.log(error)
+    }
+    // fetching after adding item
+    fetchIngredients()
+    setLoadding(false)
+  }
+
+
+
+  return (
+    <React.Fragment>
+
+    <div>Create New item</div>
+
+    <form onSubmit={handleCreation} className="form-group d-flex " style={{width: "50%", margin: '0 auto'}}>
+    <input type="text" name="title"style={{marginRight:'20px',marginTop:'20px'}} className="form-control" placeholder="Enter new title" required/>
+    <input type="text" name="unit"className="form-control" style={{marginRight:'20px',marginTop:'20px'}} placeholder="Enter new unit" />
+    <button style={{marginRight:'20px',marginTop:'20px'}} disabled={loadding} className="btn btn-primary" type="submit">Create</button>
+    </form>
+    </React.Fragment>
+  )
+
 }
