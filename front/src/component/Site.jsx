@@ -5,13 +5,19 @@ export function Site(){
 
   const [page, setPage] = useState('ingredients')
 
-  const {ingredients,fetchIngredients,deleteiingredients} = useIngredients()
+  const {
+    ingredients,
+    fetchIngredients,
+    deleteiingredients,
+    updateIngredients,
+    createIngredients
+  } = useIngredients()
 
 
 let content = null
 
 if(page === 'ingredients'){
-  content = <Ingredients onDelete={deleteiingredients} ingredients={ingredients}  />
+  content = <Ingredients fetchIngredients={fetchIngredients} onCreate={createIngredients} onUpdate={updateIngredients} onDelete={deleteiingredients} ingredients={ingredients}  />
 }
 
 
@@ -28,7 +34,10 @@ useEffect(() => {
 
   return <div>
       <NavBar currentPage={page} onChangePage={setPage}/>
+      <div className="container">
       {content}
+      </div>
+      
       </div>
 
 }
@@ -51,13 +60,13 @@ function NavBar({currentPage,onChangePage}){
    return (
 
     <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
-      <a href="#" className="navbar-brand">Recipes</a>
+      <a href="#recipes" className="navbar-brand">Recipes</a>
       <ul className="navbar-nav rm-auto">
       <li className={NavClass('Recipies')}>
-        <a href="#" onClick={() => onChangePage('Recipies')} className="nav-link">Recipies</a>
+        <a href="#recipies" onClick={() => onChangePage('Recipies')} className="nav-link">Recipies</a>
       </li>
       <li className={NavClass('ingredients')}>
-        <a href="#" onClick={() => onChangePage('ingredients')} className="nav-link">ingredients</a>
+        <a href="#ingredients" onClick={() => onChangePage('ingredients')} className="nav-link">ingredients</a>
       </li>
 
       </ul>

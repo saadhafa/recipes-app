@@ -18,6 +18,7 @@ export default class IngredientsController {
     }
 
     async update ({request, params}: HttpContextContract) {
+        console.log(request.all())
         const data = await request.validate(IngredientValidator)
         const ingredient = await Ingredient.findOrFail(params.id)
         ingredient.merge(data)

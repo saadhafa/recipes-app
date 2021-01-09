@@ -17,6 +17,7 @@ class IngredientsController {
         return await Ingredient_1.default.create(data);
     }
     async update({ request, params }) {
+        console.log(request.all());
         const data = await request.validate(IngredientValidator_1.default);
         const ingredient = await Ingredient_1.default.findOrFail(params.id);
         ingredient.merge(data);
