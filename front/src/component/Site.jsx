@@ -1,9 +1,15 @@
 import React,{useState,useEffect} from 'react'
 import { useIngredients } from '../hooks/Ingredients'
+import { useRecipies } from '../hooks/recipies'
 import {Ingredients} from './ingredients/Ingredients'
+import {Recipes} from './recipes/Recipes'
+import {ShowRecipe} from './recipes/ShowRecipe'
+
+
+
 export function Site(){
 
-  const [page, setPage] = useState('ingredients')
+  const [page, setPage] = useState('Recipies')
 
   const {
     ingredients,
@@ -14,10 +20,28 @@ export function Site(){
   } = useIngredients()
 
 
+
+  const {
+    recipies,
+    recipe,
+    closeModal,
+    fetchRecipes,
+    fetchOneRecipe
+  } = useRecipies()
+
+
 let content = null
 
 if(page === 'ingredients'){
   content = <Ingredients fetchIngredients={fetchIngredients} onCreate={createIngredients} onUpdate={updateIngredients} onDelete={deleteiingredients} ingredients={ingredients}  />
+}
+else if (page === 'Recipies'){
+  
+  content = <> 
+  {recipe ? <ShowRecipe onClose={closeModal} recipe={recipe} /> : null}
+  <Recipes onClick={fetchOneRecipe} recipies={recipies} /> 
+  
+  </>
 }
 
 
@@ -26,6 +50,9 @@ useEffect(() => {
 
   if(page === 'ingredients'){
     fetchIngredients()
+  }
+  if(page === 'Recipies'){
+    fetchRecipes()
   }
   
 }, [page])
