@@ -24,6 +24,7 @@ export function Site(){
   const {
     recipies,
     recipe,
+    closeModal,
     fetchRecipes,
     fetchOneRecipe
   } = useRecipies()
@@ -37,7 +38,7 @@ if(page === 'ingredients'){
 else if (page === 'Recipies'){
   
   content = <> 
-  {recipe ? <ShowRecipe recipe={recipe} /> : null}
+  {recipe ? <ShowRecipe onClose={closeModal} recipe={recipe} /> : null}
   <Recipes onClick={fetchOneRecipe} recipies={recipies} /> 
   
   </>

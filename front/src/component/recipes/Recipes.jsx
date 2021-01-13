@@ -1,8 +1,8 @@
-import React from 'react'
+import {memo} from 'react'
 import {Loader} from '../../UI/loader'
 
 
-export const Recipes = function({recipies,onClick}){
+export const Recipes = memo(function({recipies,onClick}){
   if(recipies === null){
     return <Loader />
   }
@@ -16,11 +16,11 @@ return (
 </>
 
 )
-}
+})
 
 
 
-const RecipesCardRow = function ({recipes,onClick}){
+const RecipesCardRow = memo(function ({recipes,onClick}){
 
   return(
     <div className="card">
@@ -36,4 +36,4 @@ const RecipesCardRow = function ({recipes,onClick}){
     </div>
   )
 
-}
+})
