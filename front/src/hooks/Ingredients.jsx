@@ -43,7 +43,7 @@ export function useIngredients(){
       if(request.ok){
           dispatch({type:"SET_ING", payload: ingredients })
       }
-    },[state ]),
+    },[state]),
     deleteiingredients: useCallback(async function(id){
       const request = await  apiFetch(`/ingredients/${id}`,{method:'DELETE'})
       if (request.ok){

@@ -23,7 +23,6 @@ function RecipeDetails({recipe}){
     <ul>
     {recipe.ingredients.map(i => <RecipeRow recipe={i} /> )}
     </ul>
-     
   </>
   )
 

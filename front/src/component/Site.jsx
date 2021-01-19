@@ -4,13 +4,16 @@ import { useRecipies } from '../hooks/recipies'
 import {Ingredients} from './ingredients/Ingredients'
 import {Recipes} from './recipes/Recipes'
 import {ShowRecipe} from './recipes/ShowRecipe'
+import {useToggler}  from '../hooks/useToggler'
+import {CreateRecipies} from './recipes/CreateRecipies'
+import { Modal } from '../UI/Modal'
 
 
 
 export function Site(){
 
   const [page, setPage] = useState('Recipies')
-
+  const [toggle,setToggle] = useToggler(false)
   const {
     ingredients,
     fetchIngredients,
@@ -30,14 +33,20 @@ export function Site(){
   } = useRecipies()
 
 
+
+
 let content = null
 
 if(page === 'ingredients'){
+
   content = <Ingredients fetchIngredients={fetchIngredients} onCreate={createIngredients} onUpdate={updateIngredients} onDelete={deleteiingredients} ingredients={ingredients}  />
 }
 else if (page === 'Recipies'){
   
   content = <> 
+
+  {toggle ?  <Modal title="Create Recipies" onClose={setToggle}> <CreateRecipies ingredientsArray={ingredients}  /> </Modal>: null }
+
   {recipe ? <ShowRecipe onClose={closeModal} recipe={recipe} /> : null}
   <Recipes onClick={fetchOneRecipe} recipies={recipies} /> 
   
@@ -48,19 +57,19 @@ else if (page === 'Recipies'){
 
 useEffect(() => {
 
-  if(page === 'ingredients'){
+  if(page === 'ingredients' || toggle){
     fetchIngredients()
   }
   if(page === 'Recipies'){
     fetchRecipes()
   }
   
-}, [page])
+}, [page,toggle])
 
 
 
   return <div>
-      <NavBar currentPage={page} onChangePage={setPage}/>
+      <NavBar currentPage={page} onClick={setToggle} valueToggle={toggle} onChangePage={setPage}/>
       <div className="container">
       {content}
       </div>
@@ -73,7 +82,10 @@ useEffect(() => {
 
 
 
-function NavBar({currentPage,onChangePage}){
+function NavBar({currentPage,onChangePage,onClick}){
+
+
+
 
 
   function NavClass(page){
@@ -95,8 +107,11 @@ function NavBar({currentPage,onChangePage}){
       <li className={NavClass('ingredients')}>
         <a href="#ingredients" onClick={() => onChangePage('ingredients')} className="nav-link">ingredients</a>
       </li>
-
       </ul>
+      <div style={{display:'flex',justifyContent:'space-between'}}>
+      <button onClick={onClick} className="btn btn-outline-light">ADD</button>
+      </div>
+     
     </nav>
   )
 }
