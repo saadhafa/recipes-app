@@ -21,7 +21,7 @@ function RecipeDetails({recipe}){
    <div dangerouslySetInnerHTML={htmlContent}></div>
     <h3>Ingredients</h3>
     <ul>
-    {recipe.ingredients.map(i => <RecipeRow recipe={i} /> )}
+    {recipe.ingredients.map(i => <RecipeRow key={i.id} recipe={i} /> )}
     </ul>
   </>
   )

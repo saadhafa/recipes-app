@@ -12,6 +12,8 @@ function reducer(state,action){
         return {...state,recipe: action.payload}
       case 'CLOSE_RECById':
         return {...state, recipe:null}
+      case 'ADD_REC': 
+        return {...state, recipes:[...state,action.payload]}
 
   
     default:
@@ -53,6 +55,14 @@ export function useRecipies(){
     },[]),
     closeModal: useCallback(function (){
       dispatch({type:'CLOSE_RECById'})
-    },[])
+    },[]),
+    CreateRecipes: useCallback(async function(data){
+      const request = apiFetch('/recipes', {method:'POST',body:JSON.stringify(data)},true)
+      if(request.ok){
+        dispatch({type:'ADD_REC',payload:data})
+      }
+      const response = (await request).json()
+      return response
+    })
   }
 }

@@ -9,6 +9,8 @@ const useCreateingredients = () => {
   return {
     ingredients: state,
     AddIngredient: useCallback(function(ingredient){
+      ingredient.quantity = 0
+      console.log(ingredient)
       setState([...state.filter(i => i.id !== ingredient.id),ingredient])
     },[state]),
     DeleteIng: useCallback(function(id) {
@@ -17,14 +19,29 @@ const useCreateingredients = () => {
   }
 }
 
-
-export const CreateRecipies = memo(function ({ingredientsArray}){
+// exported function 
+export const CreateRecipies = memo(function ({ingredientsArray,onSubmit}){
 
   const {ingredients,AddIngredient,DeleteIng} = useCreateingredients()
-  console.log('ing',ingredients)
+
+  const handleSubmit = async function(e) {
+    e.preventDefault()
+    const value = Object.fromEntries(new FormData(e.target))
+    value.ingredients = ingredients
+    try{
+      await onSubmit(value)
+    }catch(e){
+      throw e
+    }
+    
+  } 
+
+
+
+
   return (
     <div className="container">
-    <div className="row">
+    <form className="row" onSubmit={handleSubmit}>
       <div className="col-md-6">
         <label htmlFor="title">Title</label><br/>
         <input type="text" name="title" required/> <br/>
@@ -39,7 +56,8 @@ export const CreateRecipies = memo(function ({ingredientsArray}){
       <div className="col-md-6">
         {ingredientsArray ? <SelectList onChange={AddIngredient} ingredients={ingredientsArray} /> : <Loader/>  }
       </div>
-    </div>
+      <button className="btn btn-primary" type="submit">Add </button>
+    </form>
     </div>
   )
 })
@@ -69,7 +87,6 @@ const SelectRow = memo(function ({ingredient,id}){
 
 
 const IngredientsList = memo(function({ingredients,onDelete}){
-  console.log('flagg',ingredients)
 
   return (  
     <ol>
@@ -81,7 +98,7 @@ const IngredientsList = memo(function({ingredients,onDelete}){
 })
 
 const IngredientsRow = memo(function({ingredient,onDelete}){
-  return <li>{ingredient.title} <button onClick={() => onDelete(ingredient.id) } className="btn btn-danger"> Delete</button></li>
+  return <li className="mt-50">{ingredient.title } <button onClick={() => onDelete(ingredient.id) } className="btn btn-danger"> Delete</button></li>
 })
 
 
