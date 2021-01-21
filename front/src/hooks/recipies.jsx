@@ -14,6 +14,8 @@ function reducer(state,action){
         return {...state, recipe:null}
       case 'ADD_REC': 
         return {...state, recipes:[...state,action.payload]}
+      case 'DEL_REC': 
+        return {...state, recipes: state.recipes.filter(i => i.id !== action.payload)}
 
   
     default:
@@ -57,12 +59,22 @@ export function useRecipies(){
       dispatch({type:'CLOSE_RECById'})
     },[]),
     CreateRecipes: useCallback(async function(data){
-      const request = apiFetch('/recipes', {method:'POST',body:JSON.stringify(data)},true)
+      const request = await apiFetch('/recipes', {method:'POST',body:JSON.stringify(data)},true)
       if(request.ok){
         dispatch({type:'ADD_REC',payload:data})
       }
       const response = (await request).json()
       return response
+    }),
+    DeleteRecipes: useCallback(async function(id){
+      console.log(id)
+      const request = await apiFetch(`/recipes/${id}`, {method:'DELETE'})
+      
+      if(request.ok){
+        dispatch({type:'DEL_REC',payload:id})
+      }
+
+      return  await request.json()
     })
   }
 }

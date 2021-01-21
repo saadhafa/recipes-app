@@ -30,7 +30,8 @@ export function Site(){
     closeModal,
     fetchRecipes,
     fetchOneRecipe,
-    CreateRecipes
+    CreateRecipes,
+    DeleteRecipes
   } = useRecipies()
 
 
@@ -49,7 +50,7 @@ else if (page === 'Recipies'){
   {toggle ?  <Modal title="Create Recipies" onClose={setToggle}> <CreateRecipies onSubmit={CreateRecipes} ingredientsArray={ingredients}  /> </Modal>: null }
 
   {recipe ? <ShowRecipe onClose={closeModal} recipe={recipe} /> : null}
-  <Recipes onClick={fetchOneRecipe} recipies={recipies} /> 
+  <Recipes onDelete={DeleteRecipes} onClick={fetchOneRecipe} recipies={recipies} /> 
   
   </>
 }
@@ -72,7 +73,7 @@ useEffect(() => {
   return <div>
       <NavBar currentPage={page} onClick={setToggle} valueToggle={toggle} onChangePage={setPage}/>
       <div className="container">
-      {content}
+        {content}
       </div>
       
       </div>
@@ -110,7 +111,7 @@ function NavBar({currentPage,onChangePage,onClick}){
       </li>
       </ul>
       <div style={{display:'flex',justifyContent:'space-between'}}>
-      <button onClick={onClick} className="btn btn-outline-light">ADD</button>
+      <button title="To add Recipies Please go to Recipies page" disabled={currentPage !== 'Recipies'} onClick={onClick} className="btn btn-outline-light">ADD</button>
       </div>
      
     </nav>

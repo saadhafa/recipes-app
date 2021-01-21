@@ -2,25 +2,26 @@ import {memo} from 'react'
 import {Loader} from '../../UI/loader'
 
 
-export const Recipes = memo(function({recipies,onClick}){
+export const Recipes = memo(function({recipies,onClick,onDelete}){
   if(recipies === null){
     return <Loader />
   }
 return (
-  <>
+  <div className="row">
   {recipies.map(data =>{
    return  <div  className="col-md-4 mb-4 mt-4" key={data.id}>
-      <RecipesCardRow onClick={onClick} recipes={data} />
+      <RecipesCardRow onDelete={onDelete} onClick={onClick} recipes={data} />
     </div>
   })}
-</>
+</div>
 
 )
 })
 
 
 
-const RecipesCardRow = memo(function ({recipes,onClick}){
+const RecipesCardRow = memo(function ({recipes,onClick,onDelete}){
+
 
   return(
     <div className="card">
@@ -31,7 +32,9 @@ const RecipesCardRow = memo(function ({recipes,onClick}){
         <p className="card-text">
           {recipes.short}
         </p>
-        <a href="#" onClick={() => onClick(recipes.id)} className="btn btn-primary">View recipe</a>
+        <a href="#" onClick={() => onClick(recipes.id)} style={{marginRight:'30px'}} className="btn btn-primary">View recipe</a>
+        <a href="#" onClick={() => onDelete(recipes.id)} className="btn btn-danger">Delete</a>
+
       </div>
     </div>
   )

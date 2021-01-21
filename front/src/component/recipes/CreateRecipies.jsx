@@ -10,19 +10,22 @@ const useCreateingredients = () => {
     ingredients: state,
     AddIngredient: useCallback(function(ingredient){
       ingredient.quantity = 0
-      console.log(ingredient)
       setState([...state.filter(i => i.id !== ingredient.id),ingredient])
     },[state]),
     DeleteIng: useCallback(function(id) {
       setState([...state.filter(i => i.id !== id)])
-    })
+    }),
+    resetStaff: function(){
+      setState([])
+    }
   }
 }
 
 // exported function 
+
 export const CreateRecipies = memo(function ({ingredientsArray,onSubmit}){
 
-  const {ingredients,AddIngredient,DeleteIng} = useCreateingredients()
+  const {ingredients,AddIngredient,DeleteIng,resetStaff} = useCreateingredients()
 
   const handleSubmit = async function(e) {
     e.preventDefault()
@@ -30,6 +33,8 @@ export const CreateRecipies = memo(function ({ingredientsArray,onSubmit}){
     value.ingredients = ingredients
     try{
       await onSubmit(value)
+      e.target.reset()
+      resetStaff()
     }catch(e){
       throw e
     }
@@ -40,7 +45,7 @@ export const CreateRecipies = memo(function ({ingredientsArray,onSubmit}){
 
 
   return (
-    <div className="container">
+
     <form className="row" onSubmit={handleSubmit}>
       <div className="col-md-6">
         <label htmlFor="title">Title</label><br/>
@@ -58,16 +63,15 @@ export const CreateRecipies = memo(function ({ingredientsArray,onSubmit}){
       </div>
       <button className="btn btn-primary" type="submit">Add </button>
     </form>
-    </div>
   )
 })
 
 const SelectList = memo(function SelectList({ingredients,onChange}) {
 
-  const handleChange = useCallback(function(e){
+  const handleChange = function(e){
 
     onChange(ingredients[parseInt(e.target.value)])
-  })
+  }
 
 
   return (
