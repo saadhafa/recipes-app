@@ -1,33 +1,35 @@
-App
-- user
+# React Recipe App Manager
 
-LoginForm
-- < onConnect(user)
+Recipes App allows You to create and manage your recipes you can add your ingredients and from that create your own recipe, the app uses adonis as backend framework to do basic CRUD operation and stores the data in sqlite database
 
-Site
-- page
-- ingredients
-- recipes
-- currentRecipe
+### Prerequisites
 
-Recipes
-- > recipes
+You Most have Node and NPM installed on you Machine or you can use docker to start The app in this case all you need is to install docker
 
-RecipeDetail
-- > id
-- > recipe
 
-RecipeEditForm
-- > recipe
-- > ingredients
-- < onSubmit(recipe, newRecipe)
+### Installing
 
-Ingredients
-- > ingredients
-- < onUpdate(ingredient, newIngredient)
-- < onDelete(ingredient)
-- < onCreate(ingredient)
+To Install the Project, You Will Need to clone the Project from GitHub
 
-RecipeCreateForm
-- > ingredients
-- < onSubmit(newRecipe)
+Change below
+
+```
+$ git clone https://github.com/saadhafa/Data-Structures-Algorithms-golang.git Data-Structures-Algorithms-golang
+
+```
+### Dependency
+
+- React
+- boostrap
+- Adonis.js
+- sqlite3
+- Docker (Optinal)
+
+## Authors
+
+- **Saad hafa**  - [Github repositiry](https://github.com/saadhafa)
+
+
+## License
+
+This project is licensed under the MIT License

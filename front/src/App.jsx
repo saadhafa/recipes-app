@@ -23,9 +23,6 @@ export default function App() {
   
   },[])
 
-
-console.log('user ->',user)
-
 if(user === null){
   return null
 }
