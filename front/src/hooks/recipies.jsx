@@ -13,7 +13,7 @@ function reducer(state,action){
       case 'CLOSE_RECById':
         return {...state, recipe:null}
       case 'ADD_REC': 
-        return {...state, recipes:[...state,action.payload]}
+        return {...state, recipes:[...state.recipes,action.payload]}
       case 'DEL_REC': 
         return {...state, recipes: state.recipes.filter(i => i.id !== action.payload)}
 
@@ -72,9 +72,13 @@ export function useRecipies(){
       
       if(request.ok){
         dispatch({type:'DEL_REC',payload:id})
+      }else{
+        // that because the server does not return status of the request 
+        return {
+          message: 'Could not delete item'
+        }
       }
 
-      return  await request.json()
     })
   }
 }

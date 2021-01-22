@@ -1,6 +1,6 @@
 # React Recipe App Manager
 
-Recipes App allows You to create and manage your recipes you can add your ingredients and from that create your own recipe 
+Recipes App allows You to create and manage your recipes you can add your ingredients and from that create your own recipe, the app uses adonis as backend framework to do basic CRUD operation and stores the data in sqlite database
 
 ### Prerequisites
 
@@ -10,6 +10,8 @@ You Most have Node and NPM installed on you Machine or you can use docker to sta
 ### Installing
 
 To Install the Project, You Will Need to clone the Project from GitHub
+
+Change below
 
 ```
 $ git clone https://github.com/saadhafa/Data-Structures-Algorithms-golang.git Data-Structures-Algorithms-golang

@@ -23,6 +23,12 @@ return (
 const RecipesCardRow = memo(function ({recipes,onClick,onDelete}){
 
 
+  const handleDelete = async (e) => {
+    e.preventDefault()
+    const response = await onDelete(recipes.id)
+    console.log(response)
+  } 
+
   return(
     <div className="card">
       <div className="card-body">
@@ -33,7 +39,7 @@ const RecipesCardRow = memo(function ({recipes,onClick,onDelete}){
           {recipes.short}
         </p>
         <a href="#" onClick={() => onClick(recipes.id)} style={{marginRight:'30px'}} className="btn btn-primary">View recipe</a>
-        <a href="#" onClick={() => onDelete(recipes.id)} className="btn btn-danger">Delete</a>
+        <a href="#" onClick={handleDelete} className="btn btn-danger">Delete</a>
 
       </div>
     </div>
