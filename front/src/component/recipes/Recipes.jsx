@@ -38,8 +38,8 @@ const RecipesCardRow = memo(function ({recipes,onClick,onDelete}){
         <p className="card-text">
           {recipes.short}
         </p>
-        <a href="#" onClick={() => onClick(recipes.id)} style={{marginRight:'30px'}} className="btn btn-primary">View recipe</a>
-        <a href="#" onClick={handleDelete} className="btn btn-danger">Delete</a>
+        <button onClick={() => onClick(recipes.id)} style={{marginRight:'30px'}} className="btn btn-primary">View recipe</button>
+        <button onClick={handleDelete} className="btn btn-danger">Delete</button>
 
       </div>
     </div>
