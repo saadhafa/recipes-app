@@ -34,15 +34,15 @@ List of recipe
 
 Create recipe
 
-![](images/image2.jpg)
+![](https://github.com/saadhafa/recipes-app/blob/master/images/image2.jpg)
 
 View recipe details 
 
-![](images/image3.png)
+![](https://github.com/saadhafa/recipes-app/blob/master/images/image3.png)
 
 Create Ingredients 
 
-![](images/image4.png)
+![](https://github.com/saadhafa/recipes-app/blob/master/images/image4.png)
 
 
 ## Authors
