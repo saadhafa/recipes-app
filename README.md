@@ -14,7 +14,7 @@ To Install the Project, You Will Need to clone the Project from GitHub
 Change below
 
 ```
-$ git clone https://github.com/saadhafa/Data-Structures-Algorithms-golang.git Data-Structures-Algorithms-golang
+https://github.com/saadhafa/recipes-app.git
 
 ```
 ### Dependency
@@ -24,6 +24,26 @@ $ git clone https://github.com/saadhafa/Data-Structures-Algorithms-golang.git Da
 - Adonis.js
 - sqlite3
 - Docker (Optinal)
+
+
+### Preview 
+
+List of recipe
+
+![](images/image1.jpg)
+
+Create recipe
+
+![](images/image2.jpg)
+
+View recipe details 
+
+![](images/image3.png)
+
+Create Ingredients 
+
+![](images/image4.png)
+
 
 ## Authors
 
