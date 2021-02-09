@@ -30,7 +30,7 @@ https://github.com/saadhafa/recipes-app.git
 
 List of recipe
 
-![](images/image1.jpg)
+![](https://github.com/saadhafa/recipes-app/blob/master/Images/Image1.jpg)
 
 Create recipe
 
