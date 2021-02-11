@@ -4,7 +4,7 @@ Recipes App allows You to create and manage your recipes you can add your ingred
 
 ### Prerequisites
 
-You Most have Node and NPM installed on you Machine or you can use docker to start The app in this case all you need is to install docker
+You Most have Node and NPM installed on you'r Machine
 
 
 ### Installing
@@ -23,7 +23,6 @@ https://github.com/saadhafa/recipes-app.git
 - boostrap
 - Adonis.js
 - sqlite3
-- Docker (Optinal)
 
 
 ### Preview 
