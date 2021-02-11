@@ -14,7 +14,7 @@ To Install the Project, You Will Need to clone the Project from GitHub
 Change below
 
 ```
-https://github.com/saadhafa/recipes-app.git
+git clone https://github.com/saadhafa/recipes-app.git recipes-app
 
 ```
 ### Dependency
